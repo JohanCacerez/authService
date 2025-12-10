@@ -4,10 +4,10 @@ class LogoutUserUseCase:
     def __init__(self, redis_repo: RedisTokenRepository):
         self.redis_repo = redis_repo
     
-    def excecute(self, token: str):
+    def execute(self, token: str):
         if not token:
             raise ValueError("El token es requerido para cerrar sesión.")
         
         self.redis_repo.delete_token(token)
 
-        return "logout_success"
+        return {"status": "logout_success"}
