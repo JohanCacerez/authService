@@ -3,7 +3,7 @@ from app.domain.entities.user import User
 from app.infrastructure.security.password_hasher import PasswordHasher
 
 class RegisterUserUseCase:
-    def __init__(self, user_repo: UserRepository)
+    def __init__(self, user_repo: UserRepository):
         self.user_repo = user_repo
 
     def execute(self, email: str, password: str) -> User:
