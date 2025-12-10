@@ -8,7 +8,6 @@ Este microservicio implementa un sistema de autenticación basado en
 - **MongoDB** como base de datos para usuarios\
 - **Redis** para invalidación de tokens\
 - **JWT** para autenticación\
-- Arquitectura modular por capas\
 - Contenedores Docker y `docker-compose`
 
 El servicio ofrece las operaciones:
@@ -28,18 +27,25 @@ El servicio ofrece las operaciones:
      │    │     ├── auth_pb2.py
      │    │     ├── auth_pb2_grpc.py
      │    │     └── auth_server.py
-     │    ├── database/
-     │    │     ├── mongo_connection.py
-     │    │     └── redis_connection.py
+     │    ├── config/
+     │    │     ├── settings.py
      │    ├── security/
      │    │     ├── password_hasher.py
      │    │     └── jwt_service.py
-     │    └── repositories/
-     │          └── user_repository.py
-
+     │    └── persistence/
+     │          └── mongo_user_repository.py
+     ├── domain/
+     |     └── emtities/
+     |            └── user.py
      ├── application/
-     │    └── auth_service.py
-
+     │    └── ports/
+     |          ├── token_service.py
+     |          └──user_repository.py
+     |    └──usecases/
+     |          ├── login_user.py
+     |          ├── logout_user.py
+     |          ├── register_user.py
+     |          └── validate_token.py
      └── main.py
 
     scripts/
@@ -56,8 +62,7 @@ El servicio ofrece las operaciones:
 
 ### 1. Crear archivo `.env`
 
-    MONGO_URI=mongodb://mongo:27017/
-    MONGO_DB=auth_db
+    MONGO_URI=mongodb://mongo:27017/auth_db
     REDIS_HOST=redis
     JWT_SECRET=supersecret
     JWT_EXPIRE_SECONDS=3600
