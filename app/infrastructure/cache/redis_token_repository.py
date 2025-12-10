@@ -9,7 +9,7 @@ class RedisTokenRepository:
     def save_token(self, token: str, user_id: str):
         self.client.setex(token, JWT_EXPIRE_SECONDS, user_id)
 
-    def get_user_id(self, token: str):
+    def get_user_id_by_token(self, token: str):
         return self.client.get(token)
     
     def delete_token(self, token: str):

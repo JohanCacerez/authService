@@ -12,10 +12,10 @@ class ValidateTokenUseCase:
         
         user_id = self.redis_repo.get_user_id_by_token(token)
         if not user_id:
-            raise ValueError("Token inválido o expirado")
+            return {"is_valid": False, "user_id": ""}  # Token expirado o inválido
         
         validated_user_id = self.token_service.validate_token(token)
         if not validated_user_id:
-            raise ValueError("Token inválido")
+            return {"is_valid": False, "user_id": ""}  # Token inválido según el service
         
-        return validated_user_id
+        return {"is_valid": True, "user_id": validated_user_id}
