@@ -1,7 +1,7 @@
 from app.aplication.ports.user_repository import UserRepository
 from app.aplication.ports.token_service import TokenService
 from app.infrastructure.security.password_hasher import PasswordHasher
-from app.infrastructure.cahce.redis_token_repository import RedisTokenRepository
+from app.infrastructure.cache.redis_token_repository import RedisTokenRepository
 
 class LoginUserUseCase:
     def __init__(self, user_repo: UserRepository, token_service: TokenService, redis_repo: RedisTokenRepository):

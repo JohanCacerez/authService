@@ -1,5 +1,5 @@
 from app.aplication.ports.token_service import TokenService
-from app.infrastructure.cahce.redis_token_repository import RedisTokenRepository
+from app.infrastructure.cache.redis_token_repository import RedisTokenRepository
 
 class ValidateTokenUseCase:
     def __init__(self, token_service: TokenService, redis_repo: RedisTokenRepository):
