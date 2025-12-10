@@ -80,7 +80,7 @@ Ejecutar el cliente incluido:
 
     python scripts/grpc_client_test.py
 
-NOTA: si requiere hacer mas pruebas, debera cambair el correo dentro del archivo
+NOTA: si requiere hacer mas pruebas, debera cambiar el correo dentro del archivo
 
 Este script prueba:
 
