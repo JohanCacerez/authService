@@ -1,5 +1,5 @@
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from bson import ObjectId
 
@@ -12,7 +12,7 @@ class User:
 
     @staticmethod
     def create_new(email: str, password_hash: str):
-        now = datetime.now(datetime.timezone.utc).isoformat() + 'Z'
+        now = datetime.now(timezone.utc).isoformat() + 'Z'
         return User(
             id=None,
             email=email,

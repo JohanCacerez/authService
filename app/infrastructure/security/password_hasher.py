@@ -16,7 +16,7 @@ class PasswordHasher:
         if isinstance(password, str):
             password = password.encode('utf-8')
         if isinstance(password_hash, str):
-            hashed = password_hash.encode('utf-8')
+            password_hash = password_hash.encode('utf-8')
         try:
             return bcrypt.checkpw(password, password_hash)
         except ValueError:

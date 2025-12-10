@@ -15,16 +15,21 @@ class AuthServiceServicer(auth_pb2_grpc.AuthServiceServicer):
     def Register(self, request, context):
         result = self.register_uc.execute(request.email, request.password)
         return auth_pb2.RegisterResponse(
-            user_id=result["user_id"],
-            created_at=result["created_at"]
+            user_id=result.id,     
+            created_at=result.created_at  
         )
 
+
     def Login(self, request, context):
-        result = self.login_uc.execute(request.email, request.password)
+        password_bytes = request.password.encode('utf-8')
+        access_token, expires_in = self.login_uc.execute(request.email, password_bytes)
         return auth_pb2.LoginResponse(
-            access_token=result["access_token"],
-            expires_in=result["expires_in"]
+            access_token=access_token,
+            expires_in=expires_in
         )
+
+
+
 
     def ValidateToken(self, request, context):
         result = self.validate_uc.execute(request.token)

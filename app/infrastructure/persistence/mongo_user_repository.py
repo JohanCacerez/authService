@@ -19,5 +19,5 @@ class MongoUserRepository(UserRepository):
     def create(self, user: User):
         data = user.to_dict()
         result = self.collection.insert_one(data)
-        user.id = str(result.insert_id)
+        user.id = str(result.inserted_id)
         return user
