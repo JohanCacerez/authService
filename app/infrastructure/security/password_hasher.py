@@ -1,23 +1,23 @@
-import bycrypt
+import bcrypt
 from typing import Union
 
 
 class PasswordHasher:
     @staticmethod
-    def generate_passwordhash(password: Union[str, bytes], rounds: int = 12) -> bytes:
+    def generate_password_hash(password: Union[str, bytes], rounds: int = 12) -> bytes:
         if isinstance(password, str):
             password = password.encode('utf-8')
-        salt = bycrypt.gensalt(rounds=rounds)
-        hashed = bycrypt.hashpw(password, salt)
+        salt = bcrypt.gensalt(rounds=rounds)
+        hashed = bcrypt.hashpw(password, salt)
         return hashed
     
     @staticmethod
-    def verify_password(password: Union[str, bytes], passwordHash: bytes[bytes, str]) -> bool:
+    def verify_password(password: Union[str, bytes], password_hash: Union[bytes, str]) -> bool:
         if isinstance(password, str):
             password = password.encode('utf-8')
-        if isinstance(passwordHash, str):
-            hashed = passwordHash.encode('utf-8')
+        if isinstance(password_hash, str):
+            hashed = password_hash.encode('utf-8')
         try:
-            return bycrypt.checkpw(password, hashed)
+            return bcrypt.checkpw(password, password_hash)
         except ValueError:
             return False
